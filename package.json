@@ -11,12 +11,15 @@
     "axios": "^0.18.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
+    "vuelidate": "^0.7.4",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.5",
     "@vue/cli-plugin-eslint": "^3.0.0-rc.5",
     "@vue/cli-service": "^3.0.0-rc.5",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
     "node-sass": "^4.9.2",
     "sass-loader": "^7.0.3",
     "vue-template-compiler": "^2.5.16"
@@ -28,6 +31,7 @@
     },
     "extends": [
       "plugin:vue/essential",
+      "airbnb-base",
       "eslint:recommended"
     ],
     "rules": {},

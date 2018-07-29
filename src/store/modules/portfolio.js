@@ -1,33 +1,21 @@
 import * as api from '../../api';
-import { mapStateMutations, mapStateData, queryAction } from '../helper';
+import { mapAsyncState } from '../helper';
 
-// initial state
-const state = {
-  list: mapStateData([]),
-  item: mapStateData({})
-};
-
-// getters
-const getters = {
-  itemCount: (state) => state.list.data.length
-};
-
-// actions
-const actions = {
-  getAllItems: queryAction(() => api.getAllArticles(), 'list'),
-  findItem: queryAction((id) => api.findArticle(id), 'item')
-};
-
-// mutations
-const mutations = {
-  ...mapStateMutations('list'),
-  ...mapStateMutations('item'),
-};
+const listState = mapAsyncState('list', () => api.getAllArticles(), []);
+const itemState = mapAsyncState('item', (id) => api.findArticle(id), {});
 
 export default {
   namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
+  state: {
+    ...listState.state,
+    ...itemState.state,
+  },
+  actions: {
+    ...listState.actions,
+    ...itemState.actions,
+  },
+  mutations: {
+    ...listState.mutations,
+    ...itemState.mutations,
+  },
 };

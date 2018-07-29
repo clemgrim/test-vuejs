@@ -27,7 +27,7 @@ export default {
     }),
   },
   created () {
-    this.$store.dispatch('portfolio/findItem', +this.$route.params.id);
+    this.$store.dispatch('portfolio/query_item', +this.$route.params.id);
   }
 }
 </script>

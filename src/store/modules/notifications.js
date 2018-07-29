@@ -1,24 +1,17 @@
 import * as api from '../../api';
-import { mapStateMutations, mapStateData, queryAction } from '../helper';
+import { mapAsyncState } from '../helper';
 
-// initial state
-const state = {
-  count: mapStateData(0),
-};
-
-// actions
-const actions = {
-  getCount: queryAction(() => api.getNotificationsCount(), 'count'),
-};
-
-// mutations
-const mutations = {
-  ...mapStateMutations('count'),
-};
+const countState = mapAsyncState('count', () => api.getNotificationsCount(), 0);
 
 export default {
   namespaced: true,
-  state,
-  actions,
-  mutations
+  state: {
+    ...countState.state,
+  },
+  actions: {
+    ...countState.actions,
+  },
+  mutations: {
+    ...countState.mutations,
+  }
 };

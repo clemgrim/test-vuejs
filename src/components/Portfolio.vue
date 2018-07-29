@@ -1,12 +1,16 @@
 <template>
-  <div class="portfolio__container">
-    <PortfolioItem
-      v-for="item in listState.data"
-      :key="item.id"
-      :item="item"
-      @click.native="goToDetails(item)"
-      class="portfolio__item"
-    />
+  <div>
+    <h1 v-if="identity">Hello {{ identity.name }}</h1>
+    <h1 v-else>Hello guest</h1>
+    <div class="Portfolio__container">
+      <PortfolioItem
+        v-for="item in listState.data"
+        :key="item.id"
+        :item="item"
+        @click.native="goToDetails(item)"
+        class="Portfolio__item"
+      />
+    </div>
   </div>
 </template>
 
@@ -30,13 +34,13 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('portfolio/getAllItems');
+    this.$store.dispatch('portfolio/query_list');
   }
 }
 </script>
 
 <style scoped lang="scss">
-  .portfolio {
+  .Portfolio {
     &__container {
       display: flex;
       width: 100%;
@@ -46,7 +50,7 @@ export default {
 
     &__item {
       cursor: pointer;
-      flex: 0 0 32%;
+      flex: 0 0 49%;
       margin-bottom: 20px;
     }
   }

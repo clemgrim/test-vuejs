@@ -58,7 +58,7 @@ export default {
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
-        this.$store.dispatch('authentication/login', { username, password })
+        this.$store.dispatch('authentication/query_login', { username, password })
           .then(() => this.$router.replace({ name: 'home' }));
       }
     }

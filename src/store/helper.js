@@ -4,14 +4,15 @@ export const TYPES = {
   ERROR: 'error',
 };
 
-export function queryAction(command, actionType) {
-  return async ({ commit }, ...args) => {
+export function createAsyncAction(command, actionType) {
+  return async (context, payload) => {
+    const { commit } = context;
     const { success, pending, error } = mapActionTypes(actionType);
 
     commit(pending);
 
     try {
-      const result = await command(...args);
+      const result = await command(payload, context);
       commit(success, result);
 
       return result;
@@ -23,7 +24,16 @@ export function queryAction(command, actionType) {
   };
 }
 
-export function mapStateMutations(type) {
+export function createAsyncState(defaultValue) {
+  return {
+    loaded: false,
+    pending: false,
+    error: null,
+    data: defaultValue
+  };
+}
+
+export function mapAsyncMutations(type) {
   const { success, pending, error } = mapActionTypes(type);
 
   return {
@@ -43,25 +53,30 @@ export function mapStateMutations(type) {
   };
 }
 
-export function mapStateData(defaultValue) {
-  return {
-    loaded: false,
-    pending: false,
-    error: null,
-    data: defaultValue
-  };
-}
-
 export function mapActionTypes(name) {
   let types = {};
 
   for (let k in TYPES) {
-    types[TYPES[k]] = suffixMutation(name, TYPES[k]);
+    types[TYPES[k]] = getAsyncMutationName(name, TYPES[k]);
   }
 
   return types;
 }
 
-export function suffixMutation(name, type) {
+export function getAsyncMutationName(name, type) {
   return `${name}_${type}`;
+}
+
+export function mapAsyncState(name, command, defaultValue) {
+  return {
+    state: {
+      [name]: createAsyncState(defaultValue),
+    },
+    actions: {
+      ['query_' + name]: createAsyncAction(command, name),
+    },
+    mutations: {
+      ...mapAsyncMutations(name),
+    },
+  };
 }

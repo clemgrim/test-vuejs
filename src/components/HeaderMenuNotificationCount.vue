@@ -14,7 +14,7 @@ export default {
   },
   created() {
     if (this.identity) {
-      this.$store.dispatch('notifications/getCount');
+      this.$store.dispatch('notifications/query_count');
     }
   }
 }

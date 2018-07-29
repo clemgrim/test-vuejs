@@ -20,6 +20,7 @@
     "@vue/cli-service": "^3.0.0-rc.5",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
+    "jest": "^23.4.2",
     "node-sass": "^4.9.2",
     "sass-loader": "^7.0.3",
     "vue-template-compiler": "^2.5.16"

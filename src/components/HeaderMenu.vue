@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import HeaderMenuNotificationCount from './HeaderMenuNotificationCount.vue';
 
 export default {
@@ -25,14 +24,6 @@ export default {
   components: {
     HeaderMenuNotificationCount,
   },
-  computed: {
-    ...mapState('notifications', { notifCountState: 'count' })
-  },
-  created() {
-    if (this.identity) {
-      this.$store.dispatch('notifications/getCount');
-    }
-  }
 }
 </script>
 

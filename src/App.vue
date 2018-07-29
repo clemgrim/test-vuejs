@@ -18,7 +18,7 @@ export default {
     SiteHeader,
   },
   created() {
-    this.$store.dispatch('authentication/getIdentity');
+    this.$store.dispatch('authentication/query_identity');
   }
 }
 </script>

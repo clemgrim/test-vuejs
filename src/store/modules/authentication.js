@@ -33,13 +33,16 @@ const actions = {
 
     commit(pending);
 
-    api.login(username, password)
+    return api.login(username, password)
       .then(({ access_token, refresh_token }) => {
         commit(success, true);
         commit('setAccessToken', { access_token, refresh_token });
       })
       .then(() => dispatch('getIdentity'))
-      .catch(e => commit(error, e));
+      .catch(e => {
+        commit(error, e);
+        return Promise.reject(e);
+      });
   },
 };
 

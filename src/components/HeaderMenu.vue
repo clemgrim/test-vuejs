@@ -1,7 +1,6 @@
 <template>
   <nav class="HeaderMenu">
     <router-link :to="{ name: 'home' }">Home</router-link>
-    <router-link to="/shop">Shop</router-link>
     <router-link to="/about-us">About us</router-link>
     <router-link to="/contact">Contact</router-link>
     <router-link to="/notifications" v-if="identity">

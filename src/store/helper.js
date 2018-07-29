@@ -13,8 +13,12 @@ export function queryAction(command, actionType) {
     try {
       const result = await command(...args);
       commit(success, result);
+
+      return result;
     } catch (e) {
       commit(error, e);
+
+      return Promise.reject(e);
     }
   };
 }

@@ -11,7 +11,7 @@
 import HeaderMenu from './HeaderMenu.vue';
 
 export default {
-  name: 'site-header',
+  name: 'SiteHeader',
   components: {
     HeaderMenu,
   }

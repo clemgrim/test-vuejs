@@ -20,7 +20,7 @@
 import { mapState } from 'vuex';
 
 export default {
-  name: 'item',
+  name: 'Item',
   computed: {
     ...mapState('portfolio', {
       itemState: 'item'

@@ -6,9 +6,7 @@
     <router-link to="/contact">Contact</router-link>
     <router-link to="/notifications" v-if="identity">
       Notifications
-      <span v-if="notifCountState.loaded && notifCountState.data > 0">
-        ({{ notifCountState.data }})
-      </span>
+      <HeaderMenuNotificationCount />
     </router-link>
     <router-link :to="{ name: 'logout' }" v-if="identity">
       Logout
@@ -21,9 +19,13 @@
 
 <script>
 import { mapState } from 'vuex';
+import HeaderMenuNotificationCount from './HeaderMenuNotificationCount.vue';
 
 export default {
-  name: 'header-menu',
+  name: 'HeaderMenu',
+  components: {
+    HeaderMenuNotificationCount,
+  },
   computed: {
     ...mapState('notifications', { notifCountState: 'count' })
   },

@@ -1,16 +1,29 @@
 <template>
   <div class="Login">
     <h1>Login</h1>
-    <form @submit.prevent="login()" class="Login__form" novalidate>
-      <div class="form-group" :class="{ 'is-invalid': $v.user.username.$error }">
-        <label>Username</label>
-        <input v-model="user.username" required type="email" maxlength="255">
+    <form class="Login__form" novalidate @submit.prevent="login()">
+      <div :class="{ 'is-invalid': $v.user.username.$error }" class="Login__form__group">
+        <label class="Login__form__label">Username</label>
+        <input
+          v-model="user.username"
+          required
+          type="email"
+          maxlength="255"
+          class="Login__form__input"
+        >
       </div>
-      <div class="form-group" :class="{ 'is-invalid': $v.user.password.$error }">
-        <label>Password</label>
-        <input v-model="user.password" required type="password" minlength="4" maxlength="255">
+      <div :class="{ 'is-invalid': $v.user.password.$error }" class="Login__form__group">
+        <label class="Login__form__label">Password</label>
+        <input
+          v-model="user.password"
+          required
+          type="password"
+          minlength="4"
+          maxlength="255"
+          class="Login__form__input"
+        >
       </div>
-      <button class="Login__button" type="submit()">Login</button>
+      <input class="Login__button" type="submit" value="Login">
     </form>
   </div>
 </template>
@@ -19,6 +32,7 @@
 import { required, minLength, maxLength, email } from 'vuelidate/lib/validators';
 
 export default {
+  name: 'Login',
   data() {
     return {
       user: {},
@@ -43,49 +57,47 @@ export default {
       
       this.$v.$touch();
 
-      if (this.$v.$valid) {
-        this.$store.dispatch('authentication/login', { username, password });
+      if (!this.$v.$invalid) {
+        this.$store.dispatch('authentication/login', { username, password })
+          .then(() => this.$router.replace({ name: 'home' }));
       }
     }
   },
-  name: 'login',
 }
 </script>
 
 <style lang="scss" scoped>
-  .form-group {
-    margin-bottom: 20px;
-  }
-
-  label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-
-  input {
-    padding: 5px 8px;
-    border: 1px solid #ccc;
-    width: 100%;
-  }
-
-  .form-group.is-invalid {
-    label {
-      color: #f00;
-    }
-
-    input {
-      border-color: #f00;
-      outline: 0;
-      box-shadow: none;
-    }
-  }
-
   .Login {
     &__form {
       text-align: left;
       max-width: 300px;
       margin: auto;
+
+      &__label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      &__input {
+        padding: 5px 8px;
+        border: 1px solid #ccc;
+        width: 100%;
+      }
+
+      &__group {
+        margin-bottom: 20px;
+      }
+
+      &__group.is-invalid &__input {
+        border-color: #f00;
+        outline: 0;
+        box-shadow: none;
+      }
+
+      &__group.is-invalid &__label {
+        color: #f00;
+      }
     }
 
     &__button {

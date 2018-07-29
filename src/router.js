@@ -49,16 +49,12 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const accessToken = store.state.authentication.accessToken;
 
-  if (to.meta.requiresAuth) {
-    if (!accessToken) {
-      return next({ name: 'home' });
-    }
+  if (to.meta.requiresAuth && !accessToken) {
+    return next({ name: 'home' });
   }
 
-  if (to.meta.guestOnly) {
-    if (accessToken) {
-      return next({ name: 'home' });
-    }
+  if (to.meta.guestOnly && accessToken) {
+    return next({ name: 'home' });
   }
 
   return next();

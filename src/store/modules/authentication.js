@@ -6,13 +6,16 @@ const REFRESH_TOKEN_KEY = 'refreshToken';
 
 const getIdentity = () => {
   if (state.accessToken) {
-    return api.getIdentity();
+    return api.getIdentity()
+      .catch(response => {
+        if (response.status === 401) {
+          return Promise.resolve(null);
+        }
+      });
   }
 
   return Promise.resolve(null);
 };
-
-// TODO: use events and fix notification count after login
 
 // initial state
 const state = {

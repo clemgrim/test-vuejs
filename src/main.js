@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuelidate from 'vuelidate';
+import VueMeta from 'vue-meta';
 import store from './store';
 import router from './router';
 import App from './App.vue';
@@ -9,6 +10,7 @@ Vue.config.productionTip = true;
 
 Vue.use(AuthenticationPlugin);
 Vue.use(Vuelidate);
+Vue.use(VueMeta);
 
 new Vue({
   router,

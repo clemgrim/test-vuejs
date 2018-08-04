@@ -28,6 +28,11 @@ export default {
   },
   created () {
     this.$store.dispatch('portfolio/query_item', +this.$route.params.id);
+  },
+  metaInfo() {
+    return {
+      title: this.itemState.data.title,
+    };
   }
 }
 </script>

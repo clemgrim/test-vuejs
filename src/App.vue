@@ -19,6 +19,11 @@ export default {
   },
   created() {
     this.$store.dispatch('authentication/query_identity');
+  },
+  metaInfo() {
+    return {
+      titleTemplate: '%s - Test'
+    };
   }
 }
 </script>

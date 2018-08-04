@@ -35,6 +35,11 @@ export default {
   },
   created () {
     this.$store.dispatch('portfolio/query_list');
+  },
+  metaInfo() {
+    return {
+      title: 'Portfolio',
+    };
   }
 }
 </script>

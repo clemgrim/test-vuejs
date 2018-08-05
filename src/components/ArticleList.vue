@@ -17,7 +17,7 @@ export default {
   name: 'ArticleList',
   props: {
     items: {
-      type: Object,
+      type: Array,
       required: true
     }
   },

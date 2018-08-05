@@ -4,7 +4,7 @@ import { mapAsyncState } from '../helper';
 const ACCESS_TOKEN_KEY = 'accessToken';
 const REFRESH_TOKEN_KEY = 'refreshToken';
 
-const getIdentity = () => {
+const getIdentity = (payload, { state }) => {
   if (state.accessToken) {
     return api.getIdentity()
       .catch(response => {
@@ -22,7 +22,7 @@ const doLogin = ({ username, password }, { commit, dispatch }) => {
     .then(({ access_token, refresh_token }) => {
       commit('setAccessToken', { access_token, refresh_token });
     })
-    .then(() => dispatch('getIdentity'));
+    .then(() => dispatch('query_identity'));
 };
 
 // initial state

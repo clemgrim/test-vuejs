@@ -8,17 +8,17 @@ const routes = [
   {
     name: 'home',
     path: '/',
-    component:  () => import('./components/Portfolio.vue')
+    component:  () => import('./screens/Home.vue')
   },
   {
-    name: 'item',
-    path: '/item/:id',
-    component:  () => import('./components/Item.vue')
+    name: 'article',
+    path: '/article/:id',
+    component:  () => import('./screens/Article.vue')
   },
   {
     name: 'login',
     path: '/login',
-    component: () => import('./components/Login.vue'),
+    component: () => import('./screens/Login.vue'),
     meta: {
       guestOnly: true,
     }
@@ -37,7 +37,7 @@ const routes = [
   {
     name: '404',
     path: '*',
-    component:  () => import('./components/NotFound.vue')
+    component:  () => import('./screens/NotFound.vue')
   },
 ];
 

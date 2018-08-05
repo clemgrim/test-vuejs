@@ -13,7 +13,7 @@
 import SiteHeader from './components/Header.vue';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     SiteHeader,
   },

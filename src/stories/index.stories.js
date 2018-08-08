@@ -19,7 +19,10 @@ storiesOf('UI/Button', module)
     },
     components: { Button },
     template: '<Button @click="action" :rounded="rounded" :size="size">{{ label }}</Button>',
-    methods: { action: linkTo('Button', 'with some emoji') }
+    methods: { action: linkTo('Button', 'with some emoji') },
+    propsDescription: {
+      size: 'Must be xs, sm, md, lg (default to md)'
+    }
   }))
   .add('with JSX', () => ({
     render(h) {

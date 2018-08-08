@@ -1,5 +1,5 @@
 <template>
-  <button :class="'btn-' + size" class="btn" @click="$emit('click', $event)">
+  <button :class="['btn-' + size, { 'btn-rounded': rounded }]" class="btn" @click="$emit('click', $event)">
     <slot></slot>
   </button>
 </template>
@@ -12,7 +12,11 @@ export default {
       type: String,
       required: false,
       default: 'md',
-      validator: (v) => ['xs', 'sm', 'md', 'lg'].includes(v)
+      validator: (v) => ['xs', 'sm', 'md', 'lg'].includes(v),
+    },
+    rounded: {
+      type: Boolean,
+      required: false,
     }
   }
 }
@@ -44,6 +48,10 @@ export default {
   &-lg {
     font-size: 16px;
     padding: 10px 14px;
+  }
+
+  &-rounded {
+    border-radius: 4px;
   }
 }
 </style>

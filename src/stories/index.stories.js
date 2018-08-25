@@ -4,10 +4,11 @@ import { linkTo } from '@storybook/addon-links';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import VueInfoAddon from 'storybook-addon-vue-info'
 
-import Button from '../components/Button.vue'
+import Button from '../components/Button.vue';
+import Header from '../components/Header.vue';
 
 storiesOf('UI/Button', module)
-  .addDecorator(VueInfoAddon)
+  //.addDecorator(VueInfoAddon)
   .addDecorator(withKnobs)
   .add('with text', () => ({
     data() {
@@ -18,20 +19,18 @@ storiesOf('UI/Button', module)
       };
     },
     components: { Button },
-    template: '<Button @click="action" :rounded="rounded" :size="size">{{ label }}</Button>',
+    template: '<Button :onClick="action" :rounded="rounded" :size="size">{{ label }}</Button>',
     methods: { action: linkTo('Button', 'with some emoji') },
     propsDescription: {
       size: 'Must be xs, sm, md, lg (default to md)'
     }
   }))
-  .add('with JSX', () => ({
-    render(h) {
-      return <Button>With JSX</Button>
-    }
-  }))
-  .add('with some emoji', () => ({
-    components: { Button },
-    template: '<Button @click="action">😀 😎 👍 💯</Button>',
-    methods: { action: action('clicked') }
+;
+
+storiesOf('Components/Header', module)
+  .addDecorator(withKnobs)
+  .add('with text', () => ({
+    components: { Header },
+    template: '<Header />',
   }))
 ;

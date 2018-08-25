@@ -1,5 +1,9 @@
-<template>
-  <button :class="['btn-' + size, { 'btn-rounded': rounded }]" class="btn" @click="$emit('click', $event)">
+<template functional>
+  <button 
+    :class="['btn-' + props.size, { 'btn-rounded': props.rounded }]"
+    class="btn"
+    @click="props.onClick($event)"
+  >
     <slot></slot>
   </button>
 </template>
@@ -17,6 +21,10 @@ export default {
     rounded: {
       type: Boolean,
       required: false,
+    },
+    onClick: {
+      type: Function,
+      required: true,
     }
   }
 }

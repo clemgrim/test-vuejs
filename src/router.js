@@ -27,8 +27,7 @@ const routes = [
     name: 'logout',
     path: '/logout',
     beforeEnter: (to, from, next) => {
-      store.commit('authentication/logout');
-      next({ name: 'home' });
+      return store.dispatch('authentication/logout').then(next({ name: 'home' }));
     },
     meta: {
       requiresAuth: true,
@@ -47,13 +46,13 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const accessToken = store.state.authentication.accessToken;
+  const identity = store.state.authentication.identity.data;
 
-  if (to.meta.requiresAuth && !accessToken) {
+  if (to.meta.requiresAuth && !identity) {
     return next({ name: 'home' });
   }
 
-  if (to.meta.guestOnly && accessToken) {
+  if (to.meta.guestOnly && identity) {
     return next({ name: 'home' });
   }
 
